@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api/generate';
+const API_URL = 'https://quiz-app-ozkx.vercel.app/api/generate';
 
 export const fetchQuizQuestions = async (topic) => {
   const response = await fetch(API_URL, {
