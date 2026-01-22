@@ -1,0 +1,8 @@
+# Ignore local files to force fresh build
+node_modules
+client/node_modules
+server/node_modules
+dist
+build
+.vscode
+.DS_Store

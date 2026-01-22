@@ -11,7 +11,7 @@ const initialState = {
 };
 
 const QuizReducer = (state, action) => {
-  // Reducer logic remains the same
+
   switch (action.type) {
     case 'SET_LOADING': return { ...state, isLoading: action.payload };
     case 'SET_ERROR': return { ...state, isLoading: false, error: action.payload };
@@ -33,7 +33,7 @@ const QuizReducer = (state, action) => {
     case 'PREV_QUESTION': return { ...state, currentQuestionIndex: Math.max(0, state.currentQuestionIndex - 1), };
     case 'RESET_QUIZ': return initialState;
     default: return state;
-  }
+  } 
 };
 
 export const QuizContext = createContext({
