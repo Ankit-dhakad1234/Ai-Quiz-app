@@ -1,3 +1,4 @@
+// const API_URL = 'https://quiz-app-ozkx.vercel.app/api/generate';
 const API_URL = '/api/generate';
 
 export const fetchQuizQuestions = async (topic) => {
@@ -15,16 +16,15 @@ export const fetchQuizQuestions = async (topic) => {
 };
 
 export const fetchFeedback = async (topic, score) => {
-  const response = await fetch(API_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ type: 'feedback', payload: { topic, score } }),
-  });
+    const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'feedback', payload: { topic, score } }),
+    });
 
-  if (!response.ok) {
-    throw new Error('Failed to fetch feedback.');
-  }
-
-  const data = await response.json();
-  return data.feedback;
+    if (!response.ok) {
+        throw new Error('Failed to fetch feedback.');
+    }
+    const data = await response.json();
+    return data.feedback;
 };
