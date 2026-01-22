@@ -1,10 +1,12 @@
-import React from 'react';
+import React from "react";
 
-const Loader = ({ message = 'Loading...' }) => {
+const Loader = ({ message = "Loading..." }) => {
   return (
-    <div className="loader-container">
-      <div className="spinner"></div>
-      <p>{message}</p>
+    <div className="skeleton-container">
+      <div className="skeleton-title"></div>
+      <div className="skeleton-line"></div>
+      <div className="skeleton-line short"></div>
+      <p className="skeleton-text">{message}</p>
     </div>
   );
 };

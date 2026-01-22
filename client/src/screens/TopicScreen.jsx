@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuiz } from "../hooks/useQuiz";
 // CORRECT
 import { fetchQuizQuestions } from "../services/QuizServices.js";
+import { useState } from 'react';
 
 const TopicScreen = () => {
   const { dispatch } = useQuiz();
@@ -27,10 +28,20 @@ const TopicScreen = () => {
     { name: 'Wellness', svg: <svg className="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2.48 14.45c-.29.29-.77.29-1.06 0L4.2 12.2a.754.754 0 0 1 0-1.06c.29-.29.77-.29 1.06 0l3.71 3.71-1.06 1.06zm5.8-5.79c.29-.29.77-.29 1.06 0l4.25 4.25c.29.29.29.77 0 1.06-.29.29-.77.29-1.06 0l-3.71-3.71 1.06-1.06zM12.54 9.3l-1.06 1.06c-.29.29-.77.29-1.06 0l-.71-.71c-.29-.29-.29-.77 0-1.06.29-.29.77-.29 1.06 0l.71.71c.29.29.29.77 0 1.06zm-1.06-2.12c-.29-.29-.77-.29-1.06 0l-.71.71c-.29.29-.29-.77 0-1.06.29-.29.77-.29 1.06 0l.71.71c.29.29.29.77 0 1.06z"/></svg> },
   ];
 
+  const [input, setInput] = useState('');
   return (
     <div>
-      <h1>AI Knowledge Quiz</h1>
+      <h1 className='title'>AI Knowledge Quiz</h1>
+
       <p>Select a topic to start your quiz!</p>
+      <input 
+      type="text"
+      className="input-field"
+      onChange={(e) => setInput(e.target.value)} 
+      placeholder='Enter Topic Name'
+      ></input>
+      <button className="btn" onClick={() => handleTopicSelect(input)}>Start Quiz</button>
+
       <div className="topic-grid">
         {topics.map(topic => {
           const highScore = localStorage.getItem(`highScore_${topic.name}`);

@@ -31,7 +31,7 @@ app.post("/api/generate", async (req, res) => {
 
     if (type === "quiz") {
       const { topic } = payload;
-      // --- UPDATED: Slightly stronger wording in the prompt ---
+      //  Slightly stronger wording in the prompt ---
       prompt = `You are a helpful quiz generator. Your task is to generate a new and unique set of 5 multiple-choice questions on the topic "${topic}".
       Return ONLY valid JSON array format:
       [
@@ -47,7 +47,7 @@ app.post("/api/generate", async (req, res) => {
       return res.status(400).json({ error: "Invalid request type" });
     }
 
-    // --- UPDATED: Call Gemini with the new generationConfig ---
+    // Call Gemini with the new generationConfig
     const result = await model.generateContent(prompt, generationConfig);
     const text = result.response.text();
 

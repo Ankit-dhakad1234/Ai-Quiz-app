@@ -29,6 +29,7 @@ const QuizReducer = (state, action) => {
       }
       return { ...state, currentQuestionIndex: newIndex };
     }
+    
     case 'PREV_QUESTION': return { ...state, currentQuestionIndex: Math.max(0, state.currentQuestionIndex - 1), };
     case 'RESET_QUIZ': return initialState;
     default: return state;
