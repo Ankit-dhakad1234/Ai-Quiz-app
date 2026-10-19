@@ -12,6 +12,9 @@ cd server
 # Install dependencies
 npm install
 
+# Add a .env file in the project root containing your Gemini API key:
+# GEMINI_API_KEY=your_gemini_api_key
+
 # Start the server (runs on http://localhost:5000)
 npm start
 
@@ -24,6 +27,10 @@ npm install
 
 # Start the client (opens in browser at http://localhost:5173)
 npm run dev
+
+For local testing, the client uses `http://localhost:5000/api/generate`. Before deploying
+the client to Vercel, comment out that URL and uncomment the Vercel URL in
+`client/src/services/QuizServices.js`.
 
 Demo
 The working demo is available by running the project on your local machine using the instructions above.
@@ -109,4 +116,3 @@ Separate components/screens for each step. The project is highly modularized. Th
 client/src/services/QuizService.js handles AI calls. This file is the dedicated API layer for the frontend. It makes fetch requests to our local Express backend. The backend then securely adds the API key and forwards the request to the Google Gemini API, ensuring the key is never exposed to the browser.
 
 React Context is used for state management. The QuizContext.jsx file, combined with a useReducer hook, creates a central "store" for all quiz-related data (questions, user answers, score, loading/error states). This allows any component in the app to access or modify the state without passing props down through many levels.
-

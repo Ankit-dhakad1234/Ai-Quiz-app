@@ -1,15 +1,22 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-dotenv.config();
+const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+dotenv.config({ path: path.join(projectRoot, ".env") });
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 const API_KEY = process.env.GEMINI_API_KEY;
+
+if (!API_KEY) {
+  throw new Error("GEMINI_API_KEY is required in the project root .env file.");
+}
 
 // Initialize Gemini
 const genAI = new GoogleGenerativeAI(API_KEY);
@@ -54,5 +61,11 @@ app.post("/api/generate", async (req, res) => {
   }
 });
 
-// ✅ Important: Export the app instead of listening (Vercel handles this)
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Quiz API listening at http://localhost:${PORT}`);
+  });
+}
+
 export default app;

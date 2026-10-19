@@ -1,7 +1,6 @@
-// const API_URL = 'http://localhost:5000/api/generate';
-const API_URL = 'https://ai-quiz-app-smoky-ten.vercel.app/api/generate';
-// const API_URL = 'http://localhost:5000/api/generate';
-// const API_URL = 'https://quiz-app-ozkx.vercel.app/api/generate';//
+const API_URL = 'http://localhost:5000/api/generate';
+// For Vercel deployment, comment out the local URL above and uncomment this URL.
+// const API_URL = 'https://ai-quiz-app-smoky-ten.vercel.app/api/generate';
 
 export const fetchQuizQuestions = async (topic) => {
   const response = await fetch(API_URL, {
