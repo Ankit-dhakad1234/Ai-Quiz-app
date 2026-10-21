@@ -1,5 +1,6 @@
 // const API_URL = 'http://localhost:5000/api/generate';
 // const PDF_API_URL = 'http://localhost:5000/api/pdf';
+
 // For Vercel deployment, comment out the local URL above and uncomment this URL.
 // const API_URL = 'https://ai-quiz-app-smoky-ten.vercel.app/api/generate';
 
@@ -38,6 +39,28 @@ export const askPdfQuestion = async (documentId, question) => {
   return data.answer;
 };
 
+export const generatePdfQuiz = async (documentId, questionCount, difficulty) => {
+  const response = await fetch(`${PDF_API_URL}/quiz`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ documentId, questionCount, difficulty }),
+  });
+
+  const contentType = response.headers.get('content-type') || '';
+  if (!contentType.includes('application/json')) {
+    if (!response.ok) {
+      throw new Error(`PDF quiz API returned HTTP ${response.status}. Make sure the updated backend is deployed.`);
+    }
+    throw new Error('PDF quiz API returned an unexpected response.');
+  }
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to generate a quiz from this PDF.');
+  }
+  return data.questions;
+};
+
 export const fetchQuizQuestions = async (topic) => {
   const response = await fetch(API_URL, {
     method: 'POST',
@@ -52,11 +75,11 @@ export const fetchQuizQuestions = async (topic) => {
   return response.json();
 };
 
-export const fetchFeedback = async (topic, score) => {
+export const fetchFeedback = async (topic, score, totalQuestions) => {
     const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'feedback', payload: { topic, score } }),
+        body: JSON.stringify({ type: 'feedback', payload: { topic, score, totalQuestions } }),
     });
 
     if (!response.ok) {

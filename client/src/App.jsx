@@ -53,11 +53,16 @@ function AppContent() {
       if (quizState.isLoading) {
         return <div className="loading-card"><span className="spinner" /><p>Generating your quiz...</p></div>;
       }
+      if (quizState.source !== 'general') return <TopicScreen />;
       if (quizState.questions.length === 0) return <TopicScreen />;
       if (quizState.currentQuestionIndex < quizState.questions.length) return <QuizScreen />;
       return <ResultsScreen />;
     }
-    if (page === 'pdf-quiz') return <PdfQuizScreen />;
+    if (page === 'pdf-quiz') {
+      if (quizState.source !== 'pdf' || quizState.questions.length === 0) return <PdfQuizScreen />;
+      if (quizState.currentQuestionIndex < quizState.questions.length) return <QuizScreen />;
+      return <ResultsScreen />;
+    }
     if (page === 'pdf-chat') return <PdfChatScreen />;
     if (page === 'history') return <DashboardScreen onNavigate={navigate} showHistory />;
     return <DashboardScreen onNavigate={navigate} />;

@@ -14,7 +14,7 @@ npm install
 
 # Add a .env file in the project root containing your Gemini API key:
 # GEMINI_API_KEY=your_gemini_api_key
-# PDF chat also requires a Qdrant instance:
+# PDF chat and PDF quiz also require a Qdrant instance:
 # QDRANT_URL=your_qdrant_url
 # QDRANT_API_KEY=your_qdrant_api_key
 
@@ -30,6 +30,11 @@ npm install
 
 # Start the client (opens in browser at http://localhost:5173)
 npm run dev
+
+To create a quiz from a PDF, open **PDF Quiz**, upload a text-readable PDF, choose
+the question count and difficulty, and select **Generate my quiz**. PDF Quiz uses
+the uploaded document's text stored in Qdrant and the existing quiz and results
+screens.
 
 For local testing, the client uses `http://localhost:5000/api/generate`. Before deploying
 the client to Vercel, comment out that URL and uncomment the Vercel URL in

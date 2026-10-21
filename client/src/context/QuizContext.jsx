@@ -8,14 +8,25 @@ const initialState = {
   isLoading: false,
   error: null,
   topic: '',
+  source: 'general',
 };
 
 const QuizReducer = (state, action) => {
 
   switch (action.type) {
-    case 'SET_LOADING': return { ...state, isLoading: action.payload };
+    case 'SET_LOADING': return {
+      ...state,
+      isLoading: action.payload,
+      source: action.payload ? 'general' : state.source,
+    };
     case 'SET_ERROR': return { ...state, isLoading: false, error: action.payload };
-    case 'START_QUIZ': return { ...initialState, questions: action.payload.questions, topic: action.payload.topic, userAnswers: new Array(action.payload.questions.length).fill(null), };
+    case 'START_QUIZ': return {
+      ...initialState,
+      questions: action.payload.questions,
+      topic: action.payload.topic,
+      source: action.payload.source || 'general',
+      userAnswers: new Array(action.payload.questions.length).fill(null),
+    };
     case 'ANSWER_QUESTION': {
       const newUserAnswers = [...state.userAnswers];
       newUserAnswers[state.currentQuestionIndex] = action.payload.answer;

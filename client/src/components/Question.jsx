@@ -5,10 +5,7 @@ const Question = ({ questionData, userAnswer, onSelectAnswer }) => {
     <div className="question-container">
 
       {/* Question */}
-      <h2
-        className="question-text"
-        dangerouslySetInnerHTML={{ __html: questionData.question }}
-      />
+      <h2 className="question-text">{questionData.question}</h2>
 
       {/* Options */}
       <div className="options-grid">
@@ -27,8 +24,9 @@ const Question = ({ questionData, userAnswer, onSelectAnswer }) => {
               key={index}
               className={buttonClass}
               onClick={() => onSelectAnswer(option)}
-              dangerouslySetInnerHTML={{ __html: option }}
-            />
+            >
+              {option}
+            </button>
           );
         })}
       </div>

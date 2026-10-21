@@ -30,7 +30,7 @@ const ResultsScreen = () => {
       const getFeedback = async () => {
         try {
           setLoadingFeedback(true);
-          const aiFeedback = await fetchFeedback(topic, score);
+          const aiFeedback = await fetchFeedback(topic, score, questions.length);
           setFeedback(aiFeedback);
         } catch (error) {
           setFeedback("We couldn't generate feedback, but great job on completing the quiz!");
@@ -40,7 +40,7 @@ const ResultsScreen = () => {
       };
       getFeedback();
     }
-  }, [score, topic]);
+  }, [score, topic, questions.length]);
 
   const percentage = Math.round((score / questions.length) * 100);
 
