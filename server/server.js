@@ -8,6 +8,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GoogleGenAI } from "@google/genai";
 import { QdrantClient } from "@qdrant/js-client-rest";
 import multer from "multer";
+import { CanvasFactory } from "pdf-parse/worker";
 import { PDFParse } from "pdf-parse";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -106,7 +107,10 @@ app.post("/api/pdf/upload", (req, res, next) => {
       return res.status(503).json({ error: "PDF chat is not configured. Set QDRANT_URL on the server." });
     }
 
-    const parser = new PDFParse({ data: req.file.buffer });
+    const parser = new PDFParse({
+      data: new Uint8Array(req.file.buffer),
+      CanvasFactory,
+    });
     let pdfData;
     try {
       pdfData = await parser.getText();
