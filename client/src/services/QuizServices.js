@@ -1,7 +1,11 @@
-const API_URL = 'http://localhost:5000/api/generate';
-const PDF_API_URL = 'http://localhost:5000/api/pdf';
+// const API_URL = 'http://localhost:5000/api/generate';
+// const PDF_API_URL = 'http://localhost:5000/api/pdf';
 // For Vercel deployment, comment out the local URL above and uncomment this URL.
 // const API_URL = 'https://ai-quiz-app-smoky-ten.vercel.app/api/generate';
+
+const BASE_URL = 'https://ai-quiz-app-smoky-ten.vercel.app';
+const API_URL = `${BASE_URL}/api/generate`;
+const PDF_API_URL = `${BASE_URL}/api/pdf`;
 
 export const uploadPdf = async (file) => {
   const formData = new FormData();
