@@ -14,6 +14,9 @@ npm install
 
 # Add a .env file in the project root containing your Gemini API key:
 # GEMINI_API_KEY=your_gemini_api_key
+# PDF chat also requires a Qdrant instance:
+# QDRANT_URL=your_qdrant_url
+# QDRANT_API_KEY=your_qdrant_api_key
 
 # Start the server (runs on http://localhost:5000)
 npm start
